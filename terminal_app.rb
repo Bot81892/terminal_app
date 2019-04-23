@@ -1,4 +1,3 @@
-
 class Character 
     attr_accessor(:name, :attk_damage, :health)
     def initialize(name, attk_damage)
@@ -21,31 +20,56 @@ class Character
 
 end
 
+#-----------------------------------------------------------------------------------------------
+#Attacks
+class Attack
+    attr_accessor(:name, :damage_amount)
+    def initialize(name, damage_amount)
+        @name = name
+        @damage_amount = damage_amount
+    end
+    def list_attack(character)
+        print "Player uses #{@name}! #{character} deals #{@damage_amount} damage\n"
+    end
+end
+
+jab = Attack.new("jab", 20)
+sbwf = Attack.new("spiteful bug whirling fish", 10)
+
+fireball = Attack.new("fireball", 20)
+shadow_volley = Attack.new("shadow volley", 10)
+#-------------------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------------------
+#Player classes
 class Fighter < Character
     attr_accessor(:name, :attk_damage, :health, :attacks)
     def initialize(name, attk_damage)
         super(name, attk_damage)
+        @attacks = []
     end
-    def jab()
-        "Player jabs! #{@name} deals #{@attk_damage} damage\n"
+    def add_attack(attack)
+        @attacks << attack
     end
-    def SpitefulBugWhirlingFish()
-        "Player uses spiteful bug whirling fish! #{@name} deals #{@attk_damage} damage\n"
-    end
-    @attacks = ["jab", "spiteful bug whirling fish"]
 end
 
 class Mage < Character
-    attr_accessor(:name, :attk_damage, :health)
+    attr_accessor(:name, :attk_damage, :health, :attacks)
     def initialize(name, attk_damage)
         super(name, attk_damage)
+        @attacks = []
     end
-    def fireball()
-        "Player attacks with a firey blast! #{@name} deals #{@attk_damage} damage\n"
+    def add_attack(attack)
+        @attacks << attack
     end
 end
+#------------------------------------------------------------------------------------
 
 
+
+
+#------------------------------------------------------------------------------------
+#Enemy class
 class Skeleton
     attr_accessor(:name, :attk_damage, :health)
     def initialize(name, attk_damage)
@@ -68,16 +92,15 @@ class Skeleton
     def slash()
         print "Slash! #{@name} deals #{@attk_damage} damage\n"
     end
-        
 end
 
 
 skeleton = Skeleton.new("Skeleton", 15)
+draugr = Skeleton.new("Draugr", 25)
 
-mage = Mage.new("Mage", 20)
+
 
 print "Welcome to The Reclaimer\n"
-
 print "----story----\n"
 
 print "Please select your class: "
@@ -86,33 +109,44 @@ print "---------------------------\n"
 
 if (class_name == "Fighter")
     fighter = Fighter.new("Fighter", 20)
+    fighter.add_attack(jab)
+    fighter.add_attack(sbwf)
     player_type = fighter
-    player_attk = fighter.jab
-
 elsif (class_name == "Mage")
     mage = Mage.new("Mage", 20)
+    mage.add_attack(fireball)
+    mage.add_attack(shadow_volley)
     player_type = mage
-    player_attk = player_type.fireball
 end
+
 
 
 
 battling = true
 while (battling)
-    print "What attack would you like to use?"
+    enemy = 0
+    #---------------------------------------------------------
+    #Player attacks
     print "Available attacks are: "
-    (player_type.attacks).each do |attack|
-        print attack
+    (player_type.attacks).each_with_index do |attack, index|
+        print "#{index+1}.#{attack.name} "
     end
-    printplayer_attk
-    
-    skeleton.gets_hit(player_type.attk_damage)
+    print "\nWhat attack would you like to use? "
+    attack = gets.strip.to_i
+
+    player_type.attacks[attack-1].list_attack(player_type.name)
+
+    skeleton.gets_hit(player_type.attacks[attack-1].damage_amount)
     print "Skeletons health is #{skeleton.health}\n"
     if (skeleton.health <= 0)
         print "You are victorious!\n"
         break
     end
+    
     print "-----------------------------\n"
+
+    #-----------------------------------------------------
+    #Skeleton attacks
     skeleton.slash
     player_type.gets_hit(skeleton.attk_damage)
     print "Players health is #{player_type.health}\n"
