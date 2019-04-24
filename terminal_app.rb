@@ -1,3 +1,6 @@
+require 'colorize'
+require 'artii'
+
 class Character 
     attr_accessor(:name, :attk_damage, :health)
     def initialize(name, attk_damage)
@@ -91,17 +94,36 @@ end
 #------------------------------------------------------------------------------
 #METHODS used in the program
 
-def load_dots()
+def load_dots(color)
+    print "\nLoading game"
     1.upto(3) do |n|
-        print "."
+        print ".".colorize(color)
         sleep 1
+    end 
+end
+
+def storyprint(name)
+    story = "#{name}, you are the lost heir of the Coder Akademy Kingdom and have been wrongly banished for treason.The enemy has recently taken over to destroy your kingdom, but you have been recalled to fight back for the heridom"
+    story.each_char do |c|
+        if (c == ".")
+            print c
+            print "\n"
+        else
+            print c
+            sleep(1.0/20.0)
+        end
     end
+    print "\n"
+    sleep(1)
 end
 
 def intro()
-    print "Welcome to The Reclaimer"
-    load_dots()
-    print "\n----story----\n"
+    title = Artii::Base.new
+    print title.asciify("Welcome to The Reclaimer").colorize(:yellow)
+    load_dots("yellow".to_sym)
+    print "\nWhat is your name? "
+    name = gets.strip
+    storyprint(name)
 end
 
 def loadmove(time)
@@ -136,9 +158,9 @@ def easter_egg_dialogue()
     print "You: do we need to keep fighting?\n"
     loadmove(2)
     print "Enemy: i don't know, it seems pointless\n"
-    loadmove(2)
+    loadmove(3)
     print "You: i think so too, can i just have my kingdom back?\n"
-    loadmove(2)
+    loadmove(3)
     print "Enemy: you know what, sure, we dont want this kingdom anymore, its yours\n"
     loadmove(4)
     print "CONGRATULATIONS, YOU HAVE RECLAIMED YOUR KINGDOM THE PEACEFUL WAY, YOU WIN\n"
@@ -171,9 +193,6 @@ end
 
 intro
 player_type = class_select()
-
-# print "#{player_type}\n"
-
 enemies = spawn_enemies()
 enemy = 0
 
@@ -189,8 +208,8 @@ while (battling)
     end
     
     attack = select_attack()
-
     player_type.attacks[attack-1].list_attack(player_type.name)
+    loadmove(1)
 
     enemies[enemy].gets_hit(player_type.attacks[attack-1].damage_amount)
     print "#{enemies[enemy].name}'s health is #{enemies[enemy].health}\n"
@@ -214,9 +233,12 @@ while (battling)
 
     #-----------------------------------------------------
     #Skeleton attacks
+    loadmove(2)
     enemies[enemy].slash
+    loadmove(1)
     player_type.gets_hit(enemies[enemy].attk_damage)
     print "Players health is #{player_type.health}\n"
+    loadmove(1)
     if (player_type.health <= 0)
         print "Player has died!\n"
         break
