@@ -1,4 +1,3 @@
-
 require 'colorize'
 require 'artii'
 
@@ -23,7 +22,17 @@ class Character
         @health -= damage
     end
     def show_health()
-        print "Player's health is #{@health}\n"
+        if (@health <= 0)
+            print "+++ Player's " + "health".colorize(:green) + " is 0\n"
+        else
+            print "+++ Player's " + "health".colorize(:green) + " is #{@health}\n"
+        end
+    end
+    def list_attacks()
+        print "It is your turn. Available attacks are: "
+        @attacks.each_with_index do |attack, index|
+            print "#{index+1}." + "#{attack.name} ".colorize(:yellow)
+        end
     end
 end
 
@@ -36,7 +45,7 @@ class Attack
         @damage_amount = damage_amount
     end
     def list_attack(dmg)
-        print "Player uses #{@name} and deals #{dmg} damage\n"
+        print ">>> Player uses " + "#{@name}".colorize(:yellow) + " and deals " + "#{dmg}".colorize(:red) + " damage\n"
     end
 end
 #-------------------------------------------------------------------------------------------
@@ -50,12 +59,6 @@ class Fighter < Character
         @attacks = [Attack.new("jab", 20), Attack.new("spiteful bug whirling fish", (15..25).to_a)]
         @items = [Potion.new("potion of strong healing", 60)]
     end
-    def list_attacks()
-        print "Available attacks are: "
-        @attacks.each_with_index do |attack, index|
-            print "#{index+1}.#{attack.name} "
-        end
-    end
 end
 
 class Mage < Character
@@ -63,31 +66,19 @@ class Mage < Character
     def initialize(name, attk_damage)
         super(name, attk_damage)
         @attacks = [Attack.new("fireball", 20), shadow_volley = Attack.new("shadow volley", (15..25).to_a)]
-        # (15..25).to_a
         @items = [Potion.new("potion of weak healing", 30)]
-    end
-    def list_attacks()
-        print "Available attacks are: "
-        @attacks.each_with_index do |attack, index|
-            print "#{index+1}.#{attack.name} "
-        end
-    end
-    
+    end    
 end
 #------------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------------
 #Enemy class
-class Skeleton
+class Enemy
     attr_accessor(:name, :health)
     def initialize(name, health)
         @name = name
         @health = health
-        @attacks = [Attack.new("Slash", 15)]
         # @item_drop = item
-    end
-    def to_s()
-        print "The name of the class is #{@name}, attk damage: #{@attk_damage}, health: #{@health}\n"
     end
     def update_health(health)
         @health += health
@@ -95,21 +86,63 @@ class Skeleton
     def gets_hit(damage)
         @health -= damage
     end
-    def attack_player()
-        print "#{@attacks[0].name}! #{@name} deals #{@attacks[0].damage_amount} damage\n"
-        return @attacks[0].damage_amount
-    end
-    # def slash()
-    #     print "Slash! #{@name} deals #{@attk_damage} damage\n"
-    # end
     def show_health()
         if @health < 0
-            print "#{@name}'s health is 0\n"
+            print "+++ #{@name}'s health is 0\n"
         else
-            print "#{@name}'s health is #{@health}\n"
+            print "+++ #{@name}'s " + "health".colorize(:green) + " is #{@health}\n"
         end
     end
 end
+
+
+class Skeleton < Enemy
+    attr_accessor(:name, :health)
+    def initialize(name, health)
+        super(name, health)
+        @attacks = [Attack.new("Slash", 15)]
+        @first_encounter = true
+    end
+    def attack_player() #the skeletons attack
+        print ">>> #{@attacks[0].name}! #{@name} deals " + "#{@attacks[0].damage_amount}".colorize(:red) + " damage\n"
+        return @attacks[0].damage_amount
+    end
+    def meet_opponent()
+        if (@first_encounter)
+            print "A skeleton has appeared, beware!\n"
+            @first_encounter = false
+        end
+    end
+end
+
+class Dragon < Enemy
+    attr_accessor(:name, :health)
+    def initialize(name, health)
+        super(name, health)
+        @attacks = [Attack.new("Smash", 20), Attack.new("Firey breath", 30)]
+        @turn = 1
+        @first_encounter = true
+    end
+    def attack_player()
+        if (@turn % 3 == 0)
+            print ">>> #{@attacks[1].name} is unleashed! #{@name} deals #{@attacks[1].damage_amount} damage\n"
+            @turn += 1
+            return @attacks[1].damage_amount
+        else
+            print ">>> #{@attacks[0].name}! #{@name} deals #{@attacks[0].damage_amount} damage\n"
+            print "<fireball is charging up>\n"
+            @turn += 1
+            return @attacks[0].damage_amount
+        end
+    end
+    def meet_opponent()
+        if (@first_encounter)
+            print "The final fight has arrived, can you beat the dragon and reclaim your kingdom?\n"
+            @first_encounter = false
+        end
+    end
+end
+
 
 #------------------------------------------------------------------------------
 #new
@@ -126,9 +159,9 @@ end
 #METHODS used in the program
 
 def load_game()
-    print "\nHang tight, game is loading".colorize(:cyan)
+    print "\nHang tight, game is loading".colorize(:green)
     3.times do 
-        print ".".colorize(:red)
+        print ".".colorize(:green)
         sleep 1
     end 
 end
@@ -158,39 +191,39 @@ def intro()
 end
 
 def character_description()
-    print "Please choose your path:\n"
-    sleep 2
-    print "Mage\n"
+    print "Please choose your path:\n\n"
+    # sleep 2
+    print "Mage\n".colorize(:cyan)
     print "-----\n"
     print "The mage class uses magic to inflict damage on the enemy by casting spells. The mage's attacks are:\n"
-    print "1. Fireball: unleashes a firey blast on the enemy (attack damage: 20)\n"
-    print "2. Shadow volley: casts dark magic on the enemy (attack damage: 10)\n\n"
-    sleep 6
-    print "Fighter\n"
+    print "1. " + "Fireball".colorize(:yellow) + ": unleashes a firey blast on the enemy (attack damage: 20)\n"
+    print "2. " + "Shadow volley".colorize(:yellow) + ": casts dark magic on the enemy (attack damage: 10)\n\n"
+    # sleep 6
+    print "Fighter\n".colorize(:cyan)
     print "--------\n"
     print "The fighter class uses sacred techniques passed down in his family for generations. The fighter's attacks are:\n"
-    print "1. Jab: jab the enemy in the face with your shortsword (attack damage: 20)\n"
-    print "2. Spiteful bug whirling fish: spinning attack that dazes you and inflicts minimal damage (attack damage: 10)\n"
+    print "1. " + "Jab".colorize(:yellow) + ": jab the enemy in the face with your shortsword (attack damage: 20)\n"
+    print "2. " + "Spiteful bug whirling fish".colorize(:yellow) + ": spinning attack that dazes you and inflicts minimal damage (attack damage: 10)\n"
     print "----------------------------------------------------------------------------------------------------------\n"
-    sleep 2
+    # sleep 2
 end
 
 def confirm_class(character_class)
-    print "Are you sure you want to be a #{character_class}? (Y/N): "
+    print "Are you sure you want to be a #{character_class}? (" + "Y".colorize(:green) + "/" + "N".colorize(:red) + "): "
     answer = gets.strip
     confirming = true
 
     while (confirming)
         if (answer == "Y")
-            print "Success! You have chosen to be a #{character_class}!".colorize(:green)
-            print "\n"
+            print "Success! You have chosen to be a #{character_class}!\n".colorize(:green)
+            print "_________________________________________________________\n"
             return true
         elsif (answer == "N")
             return false
         end
-        print "Sorry, you didnt enter the right input".colorize(:orange)
-        print "\n"
-        print "Are you sure you want to be a #{character_class}? (Y/N): "
+        print "Sorry, you didnt enter the right input".colorize(:light_yellow)
+        print "\n\n"
+        print "Are you sure you want to be a #{character_class}? (" + "Y".colorize(:green) + "/" + "N".colorize(:red) + "): "
         answer = gets.strip
     end
 end
@@ -216,16 +249,16 @@ def class_select()
             end
         else 
             #At this point a proper class has not been selected, so we prompt the user again
-            print "Sorry, that is not a proper class\n"
+            print "Sorry, that is not a proper class\n\n".colorize(:yellow)
 
         end
         print "Please select your class, you can choose to be a mage or a fighter: "
-        class_name = gets.strip
+        class_name = gets.strip.capitalize()
     end
 end
 
 def spawn_enemies()
-    return [Skeleton.new("Skeleton", 100), Skeleton.new("Draugr", 150)]
+    return [Skeleton.new("Skeleton", 100), Skeleton.new("Draugr", 150), Dragon.new("Dragon", 200)]
 end
 
 def easter_egg_dialogue()
@@ -299,6 +332,7 @@ def heal(player_type)
     sleep 1
     player_type.update_health(100)
     print "Players health is now #{player_type.health}\n"
+    print "------------------------------\n"
 end
 
 def win_game?(enemies, enemy)
@@ -309,7 +343,7 @@ def win_game?(enemies, enemy)
 end
 
 def continue?()
-    print "You are entering a new battle!\n"
+    print "You are entering a new battle!\n".colorize(:yellow)
     print "Do you wish to continue? (Y/N): "
     answering = true
     answer = gets.strip
@@ -318,9 +352,9 @@ def continue?()
             return
         else
             if (answer == "N")
-                print "It's okay, dont be scared\n".colorize(:magenta)
+                print "It's okay, dont be scared\n\n".colorize(:yellow)
             else
-                print "You were mumbling, i didnt hear your answer\n"
+                print "You were mumbling, i didnt hear your answer\n\n".colorize(:yellow)
             end
             print "Do you wish to continue? (Y/N): "
             answer = gets.strip
@@ -330,13 +364,21 @@ end
 
 def check_enemy_health(enemies, enemy, player_type)
     if enemies[enemy].health <= 0
-        print "You are victorious in battle!\n".colorize
+        print "\nYou are victorious in battle!\n".colorize(:green)
         win_game?(enemies, enemy)   #exits after this call if the player has defeated all the enemies
         heal(player_type)  #if the player hasnt one then he has reached the next stage where he wants to heal
         continue?()   #enemy has been defeated so the next battle is true and being returned
         return true
     end
 
+end
+
+def print_line_break()
+    30.times do 
+        print "-"
+        sleep (1.0/50.0)
+    end
+    print "\n"
 end
 
 #------------------------------------------------------------------------------
@@ -353,7 +395,7 @@ enemy = 0
 battling = true
 while (battling)
     next_battle = false     #reset next battle to be false every time to ensure it works properly
-
+    enemies[enemy].meet_opponent()
     player_type.list_attacks    #show the attacks that the player can use
     #option = select_option     #show the player the items that you can use
 
@@ -363,13 +405,12 @@ while (battling)
 
     next_battle = check_enemy_health(enemies, enemy, player_type)   #gets updated to be true if check_enemy_health falls below 0
     
-    print "-----------------------------\n"
+    print "------------------------------\n"
     if (!next_battle)
         enemy_attacks(player_type, enemies, enemy)
         check_player_health(player_type)
     else
         enemy += 1
     end
-
-    print "-----------------------------\n"
+    print "------------------------------\n"
 end
