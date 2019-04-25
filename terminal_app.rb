@@ -154,25 +154,25 @@ def intro()
     load_game
     print "\nWhat is your name? "
     name = gets.strip
-    # storyprint(name)      #undo comment to get the story description at the start
+    storyprint(name)      #undo comment to get the story description at the start
 end
 
 def character_description()
     print "Please choose your path:\n"
-    # sleep 2
+    sleep 2
     print "Mage\n"
     print "-----\n"
     print "The mage class uses magic to inflict damage on the enemy by casting spells. The mage's attacks are:\n"
     print "1. Fireball: unleashes a firey blast on the enemy (attack damage: 20)\n"
     print "2. Shadow volley: casts dark magic on the enemy (attack damage: 10)\n\n"
-    # sleep 6
+    sleep 6
     print "Fighter\n"
     print "--------\n"
     print "The fighter class uses sacred techniques passed down in his family for generations. The fighter's attacks are:\n"
     print "1. Jab: jab the enemy in the face with your shortsword (attack damage: 20)\n"
     print "2. Spiteful bug whirling fish: spinning attack that dazes you and inflicts minimal damage (attack damage: 10)\n"
     print "----------------------------------------------------------------------------------------------------------\n"
-    # sleep 2
+    sleep 2
 end
 
 def confirm_class(character_class)
@@ -372,4 +372,4 @@ while (battling)
     end
 
     print "-----------------------------\n"
-ends
+end

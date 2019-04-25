@@ -4,7 +4,10 @@ This application is a game, were you can chose a class, and deal damage to monst
 
 #Contributors
 
-Jovan Nikolic and Melissa McAdam
+|[![Jovan Nikolic](/assets/contributors-Jovnik-70x70.jpg)](https://github.com/Jovnik) | [![Melissa McAdam](/assets/contributors-Bot81892-70x70.jpg)](https://github.com/Bot81892) |
+|-----------|-----------|
+| Linda Lai | James Merrigan |
+
 
 #Link
 
@@ -12,28 +15,33 @@ https://github.com/Bot81892/terminal_app
 
 #Purpose
 
-Made for gamers that want a fun way to waste time and love a simpleifed old school style game. The Reclaimer is a story driven game made to emerse the user within it's world and the challenges they must face, the goal is for the player to overcome challenges and find intrig with thee story line, resulting in a fun experience.
+Made for gamers that want a fun way to waste time and love a simpleifed old school style game. The Reclaimer is a story driven game made to emerse the user within it's world and the challenges they must face, the goal is for the player to overcome challenges and find intrig with the story line, resulting in a fun experience.
 
 #Functionality
 
- At the beging like most games is the narative story for the user to be introduced into The Reclaimers world. The game will promt the user to input a name and then choose a caracter class to play as. <!-- Based on user inputs, The Reclaimer will return a class selection, enter the arena and attack the enemy with the users choice of attack. The user can exit the game at any time-->
+ At the begining, the user will be introduced into The Reclaimers world. The game will promt the user to input a name and then choose a caracter class to play the game as.
+ 
+ Based on user inputs, The Reclaimer will return a class selection, enter the arena and attack the enemy.
 
  #Instructions for use
 
-Open Terminal or preferred console. To initialise program, enter:
+Open a Terminal or preferred console. To initialise program, enter:
 
 Gem install
+```terminal
+'artii'
+'colorize'
+```
 
-<!--ascii art gem 
-    colorize gem 
-    font??-->
+To initialise program, enter:
 
+```terminal
 $ ruby terminal_app.rb
+```
 <!--ReName the file to "The Reclaimer"?-->
 Ready to go!
 <!-- add a screen shoot of the main Menu-->
-
-From the main menu, make a selection: 
+![title.img](screen_shots/title.img) 
 
  # Design & Planing
 
