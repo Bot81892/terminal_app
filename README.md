@@ -1,29 +1,29 @@
 # Terminal_App "The Reclaimer"
 
-This application is a game, were you can chose a class, and deal damage to monsters and with an engaging story line. It is run in the Bash command line written in ruby.
+ This application is a game, were you can chose a class, and deal damage to monsters and with an engaging story line. It is run in the Bash command line written in ruby.
 
-#Contributors
+# Contributors
 
-|[![Jovan Nikolic](/assets/contributors-Jovnik-70x70.jpg)](https://github.com/Jovnik) | [![Melissa McAdam](/assets/contributors-Bot81892-70x70.jpg)](https://github.com/Bot81892) |
+|[![Jovan Nikolic](screen_shots/Jovnik.png)](https://github.com/Jovnik) | [![Melissa McAdam](/screen_shots/bot81892.png)](https://github.com/Bot81892) |
 |-----------|-----------|
-| Linda Lai | James Merrigan |
+| Jovan Nikolic | Melissa McAdam |
 
 
-#Link
+# Link
 
 https://github.com/Bot81892/terminal_app
 
-#Purpose
+# Purpose
 
 Made for gamers that want a fun way to waste time and love a simpleifed old school style game. The Reclaimer is a story driven game made to emerse the user within it's world and the challenges they must face, the goal is for the player to overcome challenges and find intrig with the story line, resulting in a fun experience.
 
-#Functionality
+# Functionality
 
  At the begining, the user will be introduced into The Reclaimers world. The game will promt the user to input a name and then choose a caracter class to play the game as.
  
  Based on user inputs, The Reclaimer will return a class selection, enter the arena and attack the enemy.
 
- #Instructions for use
+# Instructions for use
 
 Open a Terminal or preferred console. To initialise program, enter:
 
@@ -38,12 +38,14 @@ To initialise program, enter:
 ```terminal
 $ ruby terminal_app.rb
 ```
-<!--ReName the file to "The Reclaimer"?-->
+<!--Rename the file to "The Reclaimer"?-->
 Ready to go!
 <!-- add a screen shoot of the main Menu-->
-![title.img](screen_shots/title.img) 
 
- # Design & Planing
+![title.png](screen_shots/title.png) 
+
+
+# Design & Planing
 
 
 <!-- Project documentation is to be compiled as a single markdown file named README.md
