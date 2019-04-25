@@ -4,7 +4,7 @@
 
 # Contributors
 
-|[![Jovan Nikolic](screen_shots/Jovnik.png)](https://github.com/Jovnik) | [![Melissa McAdam](/screen_shots/bot81892.png)](https://github.com/Bot81892) |
+|[![Jovan Nikolic](https://avatars2.githubusercontent.com/u/48897382?s=460&v=4)](https://github.com/Jovnik) | [![Melissa McAdam](https://avatars1.githubusercontent.com/u/45807277?s=460&v=4)](https://github.com/Bot81892) |
 |-----------|-----------|
 | Jovan Nikolic | Melissa McAdam |
 
