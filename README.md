@@ -15,7 +15,7 @@ https://github.com/Bot81892/terminal_app
 
 ### Purpose
 
-Made for gamers that want a fun way to spend time and love a simplified old school style game. The Reclaimer made to emerge the user within it's world through the story, fun art and the challenges they must face, the goal is for the player to overcome enemies and find intrigue with the story line, resulting in a fun experience.
+Made for gamers that want a fun way to spend time and love a simplified old school style of game. The Reclaimer is made to emerge the user within it's world, through the story and fun art. The goal is for the player to overcome enemies and find intrigue with the story line, resulting in a fun overall experience.
 
 ### Functionality
 
@@ -104,16 +104,20 @@ After testing throughout the program, our final step was to clean up the user in
 ## Challenges
 
 Scaling back our ideas for the minimum viable product.
+
 Having a battle loop taking multiple inputs.
+
 No functionality to self heal.
+
 Finding a way to add ascill art and display it.
+
 Building a delay into the display.
 
-##User Stories
+## User Stories
 
 "I'm a student who games regularly and I found the app quite entertaining despite its current simplicity. I was able to have fun with this quick game/challenge
-with assistance from the game's story delivery." — random user
+with assistance from the game's story delivery." — random_user
 
-"I've been playing games since I was a young lad and am glade to see a game with some originality again, the story though a bit strange was quite enjoyable and only having to press a couple of buttons avoid inflaming me arthritis" — random_old guy
+"I've been playing games since I was a young lad and am glade to see a game with some originality again, the story though a bit strange was quite enjoyable and only having to press a couple of buttons avoid inflaming me arthritis" — random_old_guy
 
 "I'm a big fan of dragons, as a child use to think I was one... ANYWAY, this game was sick, ancient dragon coming back after a long slumber to tear sh*t up, so cool and the easter egg was wicked, so wish I was the heir in the game, I recommend this for everyone" — dragon_lover 
