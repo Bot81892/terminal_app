@@ -23,9 +23,9 @@ class Character
     end
     def show_health()
         if (@health <= 0)
-            print "+++ Player's " + "health".colorize(:green) + " is 0\n"
+            print "+++ Player's ".colorize(:cyan) + "health".colorize(:green) + " is 0\n"
         else
-            print "+++ Player's " + "health".colorize(:green) + " is #{@health}\n"
+            print "+++ Player's ".colorize(:cyan) + "health".colorize(:green) + " is #{@health}\n"
         end
     end
     def list_attacks()
@@ -88,9 +88,9 @@ class Enemy
     end
     def show_health()
         if @health < 0
-            print "+++ #{@name}'s health is 0\n"
+            print "+++ #{@name}'s health is 0\n".colorize(:red)
         else
-            print "+++ #{@name}'s " + "health".colorize(:green) + " is #{@health}\n"
+            print "+++ #{@name}'s ".colorize(:red) + "health".colorize(:green) + " is #{@health}\n"
         end
     end
 end
@@ -109,11 +109,29 @@ class Skeleton < Enemy
     end
     def meet_opponent()
         if (@first_encounter)
-            print "A skeleton has appeared, beware!\n"
+            print "A #{@name} has appeared, beware!\n"
+            if (@name == "Draugr")
+                #------------------------------------------------------------------------------
+                File.open("ascii/draugr_image.txt", "r") do |f|
+                    f.each_line do |line|
+                        puts line
+                    end
+                end
+                #------------------------------------------------------------------------------
+            else
+                #------------------------------------------------------------------------------
+                File.open("ascii/skull_image.txt", "r") do |f|
+                    f.each_line do |line|
+                        puts line
+                    end
+                end
+                #------------------------------------------------------------------------------
+            end
             @first_encounter = false
         end
     end
 end
+
 
 class Dragon < Enemy
     attr_accessor(:name, :health)
@@ -125,11 +143,11 @@ class Dragon < Enemy
     end
     def attack_player()
         if (@turn % 3 == 0)
-            print ">>> #{@attacks[1].name} is unleashed! #{@name} deals #{@attacks[1].damage_amount} damage\n"
+            print ">>> #{@attacks[1].name} is unleashed! #{@name} deals #{@attacks[1].damage_amount} damage\n".colorize(:red)
             @turn += 1
             return @attacks[1].damage_amount
         else
-            print ">>> #{@attacks[0].name}! #{@name} deals #{@attacks[0].damage_amount} damage\n"
+            print ">>> #{@attacks[0].name}! #{@name} deals #{@attacks[0].damage_amount} damage\n".colorize(:red)
             print "<fireball is charging up>\n"
             @turn += 1
             return @attacks[0].damage_amount
@@ -138,6 +156,13 @@ class Dragon < Enemy
     def meet_opponent()
         if (@first_encounter)
             print "The final fight has arrived, can you beat the dragon and reclaim your kingdom?\n"
+            #------------------------------------------------------------------------------
+            File.open("ascii/dragon_fight.txt", "r") do |f|
+                f.each_line do |line|
+                    puts line
+                end
+            end
+            #------------------------------------------------------------------------------
             @first_encounter = false
         end
     end
@@ -166,15 +191,15 @@ def load_game()
     end 
 end
 
-def storyprint(name)
-    story = "#{name}, you are the lost heir of the Coder Akademy Kingdom and have been wrongly banished for treason.The enemy has recently taken over to destroy your kingdom, but you have been recalled to fight back for the heirdom"
+def storyprint(name)                
+    story = "#{name.capitalize}, you are the last heir of the Coder Academy Kingdom, four months ago an ancient Dragon awoken from its slumber, and returned to where it once roamed, finding man made structures where he use to nap, the beast became enraged, with his ancient knowledge he calls forth an army of the undead and wreaks havoc upon the land, your ancestors land, the kingdom of coder academy. The enemy has recently taken over to destroy your kingdom, but you have decided to fight the beast for the people that survived and for honor."
     story.each_char do |c|
         if (c == ".")
             print c
             print "\n"
         else
             print c
-            sleep(1.0/20.0)
+            # sleep(1.0/20.0)
         end
     end
     print "\n"
@@ -195,22 +220,38 @@ def character_description()
     # sleep 2
     print "Mage\n".colorize(:cyan)
     print "-----\n"
+    # -----------------------------------------------------------------------------
+    ## ascii art ##
+    File.open("ascii/mage_image.txt", "r") do |f|
+        f.each_line do |line|
+            puts line
+         end
+    end
+    # -----------------------------------------------------------------------------
     print "The mage class uses magic to inflict damage on the enemy by casting spells. The mage's attacks are:\n"
     print "1. " + "Fireball".colorize(:yellow) + ": unleashes a firey blast on the enemy (attack damage: 20)\n"
-    print "2. " + "Shadow volley".colorize(:yellow) + ": casts dark magic on the enemy (attack damage: 10)\n\n"
+    print "2. " + "Shadow volley".colorize(:yellow) + ": casts dark magic on the enemy (attack damage: 15 to 20)\n\n"
     # sleep 6
     print "Fighter\n".colorize(:cyan)
     print "--------\n"
+    # -----------------------------------------------------------------------------
+     ## ascii art ##
+    File.open("ascii/fighter_image.txt", "r") do |f|
+        f.each_line do |line|
+            puts line
+        end
+    end
+    # -----------------------------------------------------------------------------
     print "The fighter class uses sacred techniques passed down in his family for generations. The fighter's attacks are:\n"
     print "1. " + "Jab".colorize(:yellow) + ": jab the enemy in the face with your shortsword (attack damage: 20)\n"
-    print "2. " + "Spiteful bug whirling fish".colorize(:yellow) + ": spinning attack that dazes you and inflicts minimal damage (attack damage: 10)\n"
+    print "2. " + "Spiteful bug whirling fish".colorize(:yellow) + ": spinning attack that dazes you and inflicts minimal damage (attack damage: 15 to 20)\n"
     print "----------------------------------------------------------------------------------------------------------\n"
     # sleep 2
 end
 
 def confirm_class(character_class)
     print "Are you sure you want to be a #{character_class}? (" + "Y".colorize(:green) + "/" + "N".colorize(:red) + "): "
-    answer = gets.strip
+    answer = gets.strip.capitalize
     confirming = true
 
     while (confirming)
@@ -224,7 +265,7 @@ def confirm_class(character_class)
         print "Sorry, you didnt enter the right input".colorize(:light_yellow)
         print "\n\n"
         print "Are you sure you want to be a #{character_class}? (" + "Y".colorize(:green) + "/" + "N".colorize(:red) + "): "
-        answer = gets.strip
+        answer = gets.strip.capitalize
     end
 end
 
@@ -262,15 +303,23 @@ def spawn_enemies()
 end
 
 def easter_egg_dialogue()
-    print "You:".colorize(:green) + " do we need to keep fighting?\n"
+    print "You:".colorize(:cyan) + " do we need to keep fighting?\n"
     sleep 2
     print "Enemy:".colorize(:red) + " i don't know, it seems pointless\n"
     sleep 3
-    print "You:".colorize(:green) + " i think so too, can i just have my kingdom back?\n"
+    print "You:".colorize(:cyan) + " i think so too, can i just have my kingdom back?\n"
     sleep 3
     print "Enemy".colorize(:red) + " you know what, sure, we dont want this kingdom anymore, its yours\n"
     sleep 4
-    print "CONGRATULATIONS, YOU HAVE RECLAIMED YOUR KINGDOM THE PEACEFUL WAY, YOU WIN\n".colorize(:cyan)
+# -----------------------------------------------------------------------------
+### ascii art ###
+    File.open("ascii/dragon_rider_image.txt", "r") do |f|
+        f.each_line do |line|
+            puts line
+        end
+    end
+ # -----------------------------------------------------------------------------
+    print "CONGRATULATIONS, YOU HAVE RECLAIMED YOUR KINGDOM THE PEACEFUL WAY, YOU WIN\n".colorize(:green)
     exit!
 end
 
@@ -330,13 +379,21 @@ end
 def heal(player_type)
     print "Woosh, you have absorbed the enemies spirit and regained health!\n"
     sleep 1
-    player_type.update_health(100)
+    player_type.update_health(200)
     print "Players health is now #{player_type.health}\n"
     print "------------------------------\n"
 end
 
 def win_game?(enemies, enemy)
     if (enemy == enemies.length-1)
+        #--------------------------------------------------------------------
+        ### ascii art ####
+        File.open("ascii/dead_dragon.txt", "r") do |f|
+            f.each_line do |line|
+                puts line
+            end
+        end
+        #--------------------------------------------------------------------
         print "YOU HAVE BEATEN ALL ENEMIES AND RECLAIMED THE KINGDOM, YOU WIN!\n".colorize(:cyan)
         exit!
     end
@@ -346,7 +403,7 @@ def continue?()
     print "You are entering a new battle!\n".colorize(:yellow)
     print "Do you wish to continue? (Y/N): "
     answering = true
-    answer = gets.strip
+    answer = gets.strip.capitalize
     while (answering)
         if (answer == "Y")
             return
@@ -357,7 +414,7 @@ def continue?()
                 print "You were mumbling, i didnt hear your answer\n\n".colorize(:yellow)
             end
             print "Do you wish to continue? (Y/N): "
-            answer = gets.strip
+            answer = gets.strip.capitalize
         end
     end
 end
