@@ -15,7 +15,7 @@ https://github.com/Bot81892/terminal_app
 
 ### Purpose
 
-Made for gamers that want a fun way to spend time and love a simplified old school style game. The Reclaimer is story driven made to emerge the user within it's world and the challenges they must face, the goal is for the player to overcome enemies and find intrigue with the story line, resulting in a fun experience.
+Made for gamers that want a fun way to spend time and love a simplified old school style game. The Reclaimer made to emerge the user within it's world through the story, fun art and the challenges they must face, the goal is for the player to overcome enemies and find intrigue with the story line, resulting in a fun experience.
 
 ### Functionality
 
@@ -88,3 +88,5 @@ On the second day we completed multiple methods and a MVP, soon we were thinking
 Day3 & day 4:
 
 The last two days before submission, involved finalizing and testing the code, finding little issues for example the wrong name being displayed or little additions and changes to the narrative, for users to enjoy.
+
+##User Stories

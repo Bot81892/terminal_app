@@ -100,12 +100,14 @@ class Skeleton < Enemy
     attr_accessor(:name, :health)
     def initialize(name, health)
         super(name, health)
-        @attacks = [Attack.new("Slash", 15)]
+        @attacks = [Attack.new("Slash", (15..22).to_a)]
         @first_encounter = true
     end
     def attack_player() #the skeletons attack
-        print ">>> #{@attacks[0].name}! #{@name} deals " + "#{@attacks[0].damage_amount}".colorize(:red) + " damage\n"
-        return @attacks[0].damage_amount
+        rand_i = rand(0..@attacks[0].damage_amount.length-1)
+        damage = @attacks[0].damage_amount[rand_i]
+        print ">>> #{@attacks[0].name}! #{@name} deals " + "#{damage}".colorize(:red) + " damage\n"
+        return damage
     end
     def meet_opponent()
         if (@first_encounter)
@@ -137,20 +139,27 @@ class Dragon < Enemy
     attr_accessor(:name, :health)
     def initialize(name, health)
         super(name, health)
-        @attacks = [Attack.new("Smash", 20), Attack.new("Firey breath", 30)]
-        @turn = 1
+        @attacks = [Attack.new("Smash", (20..24).to_a), Attack.new("Firey breath", 30)]
+        @turn = 0
         @first_encounter = true
     end
+    def smash()
+        rand_i = rand(0..@attacks[0].damage_amount.length-1)
+        damage = @attacks[0].damage_amount[rand_i]
+        print ">>> " + "#{@attacks[0].name}!".colorize(:yellow) + " #{@name} deals " + "#{damage}".colorize(:red) + " damage\n"
+        print "   <fireball is charging up>\n"
+        return damage
+    end
+    def breathe_fire()
+        print ">>> " + "#{@attacks[1].name}".colorize(:yellow) + " is unleashed! #{@name} deals " + "#{@attacks[1].damage_amount}".colorize(:red) + " damage\n"
+        return @attacks[1].damage_amount
+    end
     def attack_player()
+        @turn += 1
         if (@turn % 3 == 0)
-            print ">>> #{@attacks[1].name} is unleashed! #{@name} deals #{@attacks[1].damage_amount} damage\n".colorize(:red)
-            @turn += 1
-            return @attacks[1].damage_amount
+            return breathe_fire()
         else
-            print ">>> #{@attacks[0].name}! #{@name} deals #{@attacks[0].damage_amount} damage\n".colorize(:red)
-            print "<fireball is charging up>\n"
-            @turn += 1
-            return @attacks[0].damage_amount
+            return smash()
         end
     end
     def meet_opponent()
@@ -334,7 +343,7 @@ def select_attack(player_type)
         elsif (attack_index >= 0 && attack_index < player_type.attacks.length) #gonna have to change this to player.attacks.length
             return attack_index
         else
-            print "Sorry, you have not selected an appropriate attack, please try again\n"
+            print "Sorry, you have not selected an appropriate attack, please try again\n".colorize(:yellow)
         end
         #at this point a proper attack has not been selected
         print "Please select an attack: "
