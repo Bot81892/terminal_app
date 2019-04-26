@@ -43,7 +43,6 @@ $ ruby terminal_app.rb
 Ready to go!
 
 ![title.png](screen_shots/title.png) 
-<!--Hope to add a beter screen shot including finalized intro story once we agree on it-->
 
 
 ## Design & Planing
@@ -56,9 +55,8 @@ Our main priority, was providing an engaging experience for the user.
 
 
 ![interface.png](screen_shots/interface.png) 
-<!--If you have any stuff for brain storming slack it to me I'll add it in-->
 
-<!--I hope to add a picture of some writern brain storming, probablly be a scrible of our first ideas.-->
+
 
 ![to_do.jpg](screen_shots/to_do.jpg) 
 
@@ -90,32 +88,32 @@ Day3 & day 4:
 The last two days before submission, involved finalizing and testing the code, finding little issues for example the wrong name being displayed or little additions and changes to the narrative, for users to enjoy.
 
 ## Coding Process
-<!--
+After defining the main character and enemy types, our focus was on getting a working battle simulation. As we had discussed, we planed to have the players choose between two attacks with different attack values as they fought an enemy.
 
-After defining the main search, save and suggest function and logic for myMDb's frontend and backend during project planning, the initial focus was to create a minimal but functional base code for each user option. This primarily involved creating numerous methods to search, store and interpolate movie information stored in the hash returned by OMDb's API into an empty array acting as the watchlist displayed to users.
+This lead to a lot of writing and rewriting code as we started to build upon our ideas, adding features to see the damage being dealt and received, concepts for replenishing health and a story/interface for the users.
 
-With time permitting, an additional method to suggest a random movie title to users based on selecting their current mood was also included in the initial build. While our long-term preference would be to generate a list of movies by genre from an API, our current workaround was to hardcode a database of arrays by movie genre and randomly select a title value based on index. We decide to save the array in a separate file to keep the initialise file as clean and readable as possible.
+For our MVP, the goal was a playable game that was easy for the user to use and gave use a foundation to build on.
 
-After testing the application to ensure users could loop back to the main menu throughout the program, our final step was to clean up the user interface, add comments in pseudocode and refactor into modules to keep our files and logic streamlined and clearly laid out. Using modules allowed us to move the most sizeable but related methods and data into logical containers to keep our initialise file relatively streamlined and short.
+With time permitting, we were able to add random values to the attack damages for all classes, a engaging story line and ascii art, for fun and to break apart the code.
 
-Challenges
+Throughout the process of making this application, we tested the application, to ensure users could type lower case and it would be capitalized, couldn't input a integer when asking for a string and could loop back to the main menu if he decided to change classes.
 
-Scaling back features to the minimum to plot out iterative future enhancements.
-No functionality to export or inbuilt database to store values outside of a single user session or store movie titles for randomiser.
-Finding an API for movie information data retrieval.
-Testing out movie titles stored in randomiser due to exact/near exact search parameters required by API.
-Future Enhancements
+After testing throughout the program, our final step was to clean up the user interface and helpful comments to describe parts of the code. 
 
-Functionality to export or email list to within display movies option.
 
-Create a database to store movie shortlist permanently (beyond a single session).
+## Challenges
 
-Enable broad match search parameters using OMDb API.
-
-Generate a list of movies by genre for randomiser via an API rather than manual hardcoding.
-
-Add error messages – e.g. if duplicate movies are added (“This movie already exists.”)
-
-Functionality to update or delete existing movie entries. -->
+Scaling back our ideas for the minimum viable product.
+Having a battle loop taking multiple inputs.
+No functionality to self heal.
+Finding a way to add ascill art and display it.
+Building a delay into the display.
 
 ##User Stories
+
+"I'm a student who games regularly and I found the app quite entertaining despite its current simplicity. I was able to have fun with this quick game/challenge
+with assistance from the game's story delivery." — random user
+
+"I've been playing games since I was a young lad and am glade to see a game with some originality again, the story though a bit strange was quite enjoyable and only having to press a couple of buttons avoid inflaming me arthritis" — random_old guy
+
+"I'm a big fan of dragons, as a child use to think I was one... ANYWAY, this game was sick, ancient dragon coming back after a long slumber to tear sh*t up, so cool and the easter egg was wicked, so wish I was the heir in the game, I recommend this for everyone" — dragon_lover 
