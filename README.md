@@ -6,7 +6,7 @@ This application is a game, were you can choose a class, and deal damage to mons
 
 |<img src="https://avatars2.githubusercontent.com/u/48897382?s=460&v=4" alt="Jovan Nikolic" width="100"/> |<img src="https://avatars1.githubusercontent.com/u/45807277?s=460&v=4" alt="Melissa McAdam" width="100"/> |
 |-----------|-----------|
-| Jovan Nikolic | Melissa McAdam |
+|  <a href="https://github.com/Jovnik">Jovan Nikolic</a> | <a href="https://github.com/Bot81892">Melissa McAdam</a> |
 
 
 ### Link
